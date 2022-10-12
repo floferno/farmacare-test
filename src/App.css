@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app-container {
+  margin: 64px 320px 72px 320px;
+}
+
+.search-box {
+  background: url("images/search.svg") no-repeat ;
+  width: 400px;
+  height: 40px;
+  padding: 2px, 5px;
+  background: #FFFFFF;
+  text-indent: 10px;
+    /* black-lighter */
+  
+    border: 1px solid #CCCCCC;
+    /* inner-input */
+  
+    box-shadow: inset 0px 2px 4px rgba(51, 51, 51, 0.15);
+    border-radius: 4px;
+}
