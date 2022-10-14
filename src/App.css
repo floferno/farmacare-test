@@ -6,15 +6,39 @@
 
 .app-container {
   margin: 64px 320px 72px 320px;
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+  /* justify-content: center; */
+}
+
+.title {
+  margin-bottom: 42px;
+}
+
+input {
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: contain; 
+  position: relative;
+}
+
+.search-icon {
+  width: 12px;
+  position: absolute;
+  box-sizing: border-box;
+  top: 25.4%;
+  left: 26%;
+  z-index: 1;
 }
 
 .search-box {
-  background: url("images/search.svg") no-repeat ;
+
   width: 400px;
   height: 40px;
   padding: 2px, 5px;
   background: #FFFFFF;
-  text-indent: 10px;
+  text-indent: 30px;
     /* black-lighter */
   
     border: 1px solid #CCCCCC;
@@ -22,4 +46,166 @@
   
     box-shadow: inset 0px 2px 4px rgba(51, 51, 51, 0.15);
     border-radius: 4px;
+}
+
+.table {
+  width: 640px;
+  /* height: 528px; */
+}
+
+tr {
+  border-bottom: 1px solid #ccc;
+}
+
+th, td {
+  border-bottom: none;
+}
+
+.th-border {
+  border-bottom: 1px solid #333;
+}
+
+.table-link {
+  color: #006A7A;
+  font-weight: 700;
+  font-family: 'Nunito Sans';
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.006em;
+  cursor: pointer;
+  
+}
+
+.table-count-stock {
+  color: #219653;
+  font-family: 'Nunito Sans';
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.006em;
+  /* cursor: pointer; */
+}
+
+.table-bold {
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.006em;
+}
+
+.pokemon-stock {
+  color: #333;
+  font-weight: 700;
+  font-family: 'Nunito Sans';
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.006em;
+  cursor: pointer;
+}
+
+
+.pokemon-name:hover {
+  color: #5b939b;
+}
+.pokemon-detail-page {
+  padding: 0 40px;
+}
+
+.pokemon-detail_button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 66px 40px;
+}
+
+.pokemon-detail-sub1 {
+  font-family: 'Rubik';
+  font-weight: 400;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.pokemon-detail-sub2 {
+  font-family: Rubik;
+  font-weight: 400; 
+  font-size: 32px;
+}
+
+.pokemon-detail-history1 {
+  font-family: Rubik;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.pokemon-detail-history2 {
+  font-family: 'Nunito Sans';
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.pokemon-detail-table {
+  width: 1200px;
+}
+
+.prev-button {
+  color: #006A7A;
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.update-stock-button {
+  display: flex;
+  padding: 6px 12px;
+  height: 36px;
+  color: #006A7A;
+  font-size: 14px;
+  font-family: 'Rubik';
+  font-weight: 500;
+
+  /* white-dark */
+
+  background: #F7F7F7;
+  /* black-lighter */
+
+  border: 1px solid #CCCCCC;
+  /* button-default */
+
+  box-shadow: 0px 1px 2px rgba(51, 51, 51, 0.15), inset 0px 2px 2px rgba(255, 255, 255, 0.15), inset 0px -1px 2px rgba(51, 51, 51, 0.15);
+  border-radius: 4px;
+}
+
+.update-stock-button:hover {
+  color: #5b939b;
+  background-color: #F7F7F7;
+}
+
+.pokemon-detail-title {
+  font-family: Rubik;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+  letter-spacing: -0.021em;
+  text-align: left;
+}
+
+.modal-title {
+  font-family: "Rubik";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center;
+}
+
+.modal-input {
+  width: 48px;
+  height: 36px;
+ }
+
+.modal-table-body {
+  width: 280px;
+  height: 56px;
 }
