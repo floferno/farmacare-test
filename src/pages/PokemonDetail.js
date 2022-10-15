@@ -2,8 +2,10 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import prevPageIcon from '../images/prevPage.svg'
 import { Table, Modal, Container, Row, Col, Form } from 'react-bootstrap';
+import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateStockModal(props) {
+
     return (
         <Modal
             {...props}
@@ -51,14 +53,19 @@ function UpdateStockModal(props) {
 }
 
 export default function PokemonDetail() {
+    let navigate = useNavigate();
+    let { name } = useParams()
+
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <div className="pokemon-detail-page">
             <div className="pokemon-detail_button-group">
-                <Button variant="outline-light" className="prev-button"><img src={prevPageIcon}></img>Stok Pokémon</Button>
+                <Button variant="outline-light" className="prev-button" onClick={() => {
+                    navigate('/')
+                }}><img src={prevPageIcon}></img>Stok Pokémon</Button>
                 <Button className="update-stock-button" onClick={() => setModalShow(true)}>Update Stok</Button>
             </div>
-            <p className="pokemon-detail-title">Pikachu</p>
+            <p className="pokemon-detail-title" style={{ textTransform: 'capitalize' }}>{name}</p>
             <div className="pokemon-detail-subtitle">
                 <p className="pokemon-detail-sub1">Sisa Stok</p>
                 <p className="pokemon-detail-sub2">10 pcs</p>
@@ -70,7 +77,7 @@ export default function PokemonDetail() {
             <div>
                 <Table className="table d-flex row pokemon-detail-table">
                     <thead>
-                        <tr className="d-flex justify-content-between th-border ">
+                        <tr className="th-border ">
                             <th scope="col">Waktu</th>
                             <th scope="col">Kegiatan</th>
                             <th scope="col">Catatan</th>
@@ -79,7 +86,7 @@ export default function PokemonDetail() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="d-flex justify-content-between d-flex align-items-center">
+                        <tr className="align-items-center">
                             <td className="">2 Apr 2021, 08:00</td>
                             <td className="table-link">Update Stok</td>
                             <td className="">"Stok Awal"</td>

@@ -1,23 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import searchIcon from '../images/search.svg'
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios'
-const baseUrl = `https://pokeapi.co/api/v2/pokemon/`
+const baseUrl = `https://pokeapi.co/api/v2/pokemon`
 
 export default function Homepage() {
     const [pokemons, setPokemons] = useState([])
     const [query, setQuery] = useState("")
     const [search, setSearch] = useState("")
+    let navigate = useNavigate();
 
-    // const navigateToPokemonDetail = () => {
-    //     navigate('/pokemon');
-    // }; 
-    console.log(query)
-    function capitalizeFirstLetter(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1)
-    }
+
 
     const getPokemons = async () => {
         try {
@@ -79,7 +75,9 @@ export default function Homepage() {
                                     console.log(pokemon)
                                     return (
                                         <tr className="d-flex justify-content-between">
-                                            <td key={i + 1} className="table-link">{capitalizeFirstLetter(pokemon.name)}</td>
+                                            <td key={i + 1} className="table-link" onClick={() => {
+                                                navigate(`/pokemon/${pokemon.name}`)
+                                            }} style={{ textTransform: 'capitalize' }}>{pokemon.name}</td>
                                             <td className="pokemon-stock">10 pcs</td>
                                         </tr>
                                     )
@@ -89,6 +87,6 @@ export default function Homepage() {
                     </Table>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
