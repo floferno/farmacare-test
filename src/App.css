@@ -115,7 +115,7 @@ th, td {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 66px 40px;
+  padding: 40px 0;
 }
 
 .pokemon-detail-sub1 {
@@ -205,7 +205,7 @@ th, td {
   height: 36px;
  }
 
-.modal-table-body {
+/* .modal-table-body {
   width: 280px;
   height: 56px;
-}
+} */

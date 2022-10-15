@@ -1,10 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import prevPageIcon from '../images/prevPage.svg'
 import { Table, Modal, Container, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateStockModal(props) {
+    const [input, setInput] = useState({
+        pcs: 0,
+        lusin: 0
+    })
+
+    const handleChange = e => {
+        let newValue = {
+            ...input,
+            [e.target.name]: e.target.value,
+        };
+        setInput(newValue);
+    };
+
 
     return (
         <Modal
@@ -29,18 +42,18 @@ function UpdateStockModal(props) {
                     </Row>
                     <Row className="modal-table-body">
                         <Col >Pcs</Col>
-                        <Col className="d-flex align-items-center">1 x <Form.Control className="modal-input pcs" type="text" /> = </Col>
-                        <Col>0</Col>
+                        <Col className="d-flex align-items-center">1 x <Form.Control className="modal-input pcs" type="text" name="pcs" value={input.pcs} onChange={handleChange} /> = </Col>
+                        <Col>{input.pcs}</Col>
                     </Row>
                     <Row className="modal-table-body">
                         <Col>Lusin</Col>
-                        <Col className="d-flex align-items-center">12 x <Form.Control className="modal-input lusin" type="text" /> = </Col>
-                        <Col>0</Col>
+                        <Col className="d-flex align-items-center">12 x <Form.Control name="lusin" className="modal-input lusin" type="text" value={input.lusin} onChange={handleChange} /> = </Col>
+                        <Col>{12 * input.lusin}</Col>
                     </Row>
                     <Row className="modal-table-body">
                         <Col>Total Stok <span>(dalam pcs)</span></Col>
                         <Col>Lusin</Col>
-                        <Col></Col>
+                        <Col>{parseInt(12 * input.lusin) + parseInt(input.pcs)}</Col>
                     </Row>
                 </Container>
             </Modal.Body>
@@ -75,7 +88,7 @@ export default function PokemonDetail() {
                 <p className="pokemon-detail-history2">Satuan stok dalam pcs</p>
             </div>
             <div>
-                <Table className="table d-flex row pokemon-detail-table">
+                <Table className="table row pokemon-detail-table">
                     <thead>
                         <tr className="th-border ">
                             <th scope="col">Waktu</th>
