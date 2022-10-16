@@ -25,7 +25,7 @@ export default function UpdateStock() {
                     <p>544 pcs</p>
                 </div>
             </div>
-            <Table className="table row pokemon-detail-table">
+            <Table className='col-xs-12 mt-4' responsive>
                 <thead>
                     <tr className="th-border ">
                         <th scope="col">Keterangan</th>

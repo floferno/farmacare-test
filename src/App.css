@@ -48,10 +48,10 @@ input {
     border-radius: 4px;
 }
 
-.table {
+/* .table {
   width: 640px;
   /* height: 528px; */
-}
+/* }  */
 
 tr {
   border-bottom: 1px solid #ccc;
@@ -144,9 +144,9 @@ th, td {
   font-size: 14px;
 }
 
-.pokemon-detail-table {
+/* .pokemon-detail-table {
   width: 1200px;
-}
+} */
 
 .prev-button {
   color: #006A7A;

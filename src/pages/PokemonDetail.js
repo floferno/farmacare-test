@@ -10,6 +10,8 @@ function UpdateStockModal(props) {
         lusin: 0
     })
 
+    let navigate = useNavigate();
+
     const [pcs, setPcs] = useState("")
 
     const handleChange = e => {
@@ -60,8 +62,18 @@ function UpdateStockModal(props) {
                 </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={props.onHide}>Simpan</Button>
-                <Button variant="secondary" onClick={props.onHide}>Batal</Button>
+                <Button
+                    variant="primary"
+                    onClick={() => {
+                        navigate(`/update-stock/`)
+                    }} >
+                    Simpan
+                </Button>
+                <Button
+                    variant="secondary"
+                    onClick={props.onHide}>
+                    Batal
+                </Button>
             </Modal.Footer>
         </Modal>
     );
@@ -90,7 +102,7 @@ export default function PokemonDetail() {
                 <p className="pokemon-detail-history2">Satuan stok dalam pcs</p>
             </div>
             <div>
-                <Table className="table row pokemon-detail-table">
+                <Table className='col-xs-12 mt-4' responsive>
                     <thead>
                         <tr className="th-border ">
                             <th scope="col">Waktu</th>

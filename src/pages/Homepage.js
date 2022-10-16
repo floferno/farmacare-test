@@ -13,8 +13,6 @@ export default function Homepage() {
     const [search, setSearch] = useState("")
     let navigate = useNavigate();
 
-
-
     const getPokemons = async () => {
         try {
             let response = await axios.get(`${baseUrl}`)
@@ -31,8 +29,6 @@ export default function Homepage() {
             if (e.key === 'Enter') {
                 let response = await axios.get(`${baseUrl} ${pokemon}`)
                 let data = await response.json()
-                // let pokemonDetail = await response.data.results.url
-                // console.log(data, "ini detail")
                 setSearch(search)
             }
         } catch (err) {

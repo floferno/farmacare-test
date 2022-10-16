@@ -11,7 +11,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Homepage />}></Route>
       <Route path="/pokemon/:name" element={<PokemonDetail />} ></Route>
-      <Route path="/update-stock" element={<UpdateStock />} ></Route>
+      <Route path="/update-stock/" element={<UpdateStock />} ></Route>
     </Routes >
     // </Container >
   );
