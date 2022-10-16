@@ -10,6 +10,8 @@ function UpdateStockModal(props) {
         lusin: 0
     })
 
+    const [pcs, setPcs] = useState("")
+
     const handleChange = e => {
         let newValue = {
             ...input,

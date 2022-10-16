@@ -209,3 +209,63 @@ th, td {
   width: 280px;
   height: 56px;
 } */
+
+
+.update-stock-page {
+  margin: 64px 320px auto 320px;
+}
+
+.update-stock-title {
+  font-family: Rubik;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+  letter-spacing: -0.011em;
+  text-align: left;
+}
+
+.update-stock-subtitle {
+  font-family: Rubik;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.006em;
+  text-align: left;
+}
+
+.update-stock-difference {
+  font-family: Rubik;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: -0.021em;
+  text-align: left;
+}
+
+.update-stock-note-input {
+  width: 640px;
+    height: 76px;
+  
+    /* white */
+  
+    background: #FFFFFF;
+    /* black-lighter */
+  
+    border: 1px solid #CCCCCC;
+    /* inner-input */
+  
+    box-shadow: inset 0px 2px 4px rgba(51, 51, 51, 0.15);
+    border-radius: 4px;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+textarea {
+  /* text-indent: 8px; */
+  padding: 8px;
+}
