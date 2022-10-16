@@ -23,6 +23,8 @@ export default function Homepage() {
         }
     }
 
+
+
     const searchPokemon = async (pokemon, e) => {
         console.log("masuk seacrh")
         try {
@@ -41,9 +43,7 @@ export default function Homepage() {
         getPokemons()
     }, [])
 
-    // useEffect(() => {
-    //     searchPokemon()
-    // }, [])
+
 
     return (
         <div className="app-container">

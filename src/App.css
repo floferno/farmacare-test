@@ -205,11 +205,17 @@ th, td {
   height: 36px;
  }
 
-/* .modal-table-body {
-  width: 280px;
-  height: 56px;
-} */
+/* Chrome, Safari, Edge, Opera */
+.modal-input::-webkit-outer-spin-button,
+.modal-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+.modal-input[type=number] {
+  -moz-appearance: textfield;
+}
 
 .update-stock-page {
   margin: 64px 320px auto 320px;
