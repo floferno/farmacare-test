@@ -6,27 +6,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateStockModal(props) {
     let { name } = useParams()
-    const [input, setInput] = useState({
-        pcs: 0,
-        lusin: 0
-    })
-    // const [showPcs, setShowPcs] = useState(
-    //     JSON.parse(localStorage.getItem("pokemonData")) || 0
-    // )
-    // const [showLusin, setShowLusin] = useState(
-    //     JSON.parse(localStorage.getItem("pokemonData")) || 0
-    // )
+    const [input, setInput] = useState({})
 
     let stockPcs = 1 * input.pcs
     let stockLusin = 12 * input.lusin
     let totalPcs = stockPcs + stockLusin
-    console.log()
-    const [pokemonData, setPokemonData] = useState({
-        date: new Date(),
-        pokemonName: name
-    })
-
-
     let navigate = useNavigate();
 
 
@@ -38,18 +22,28 @@ function UpdateStockModal(props) {
         setInput(newValue);
     };
 
-    const saveChange = (e) => {
+    const saveChange = () => {
         navigate(`/update-stock/`)
-        const storedData = localStorage.setItem("pokemonData", JSON.stringify({
-            ...pokemonData,
-            ...input,
-            total: totalPcs
-        }));
-    }
+        var pokemonData = [];
+        pokemonData = JSON.parse(localStorage.getItem("users") || "[]");
+        pokemonData.push({
+            pokemonName: name,
+            pcs: stockPcs,
+            lusin: stockLusin,
+            total: totalPcs,
+            history: [
+                {
+                    date: new Date().toLocaleString(),
+                    activity: '',
+                    note: '',
+                    count: 0,
+                    totalStock: 0
+                }
+            ]
+        })
 
-    // useEffect(() => {
-    //     setPokemonData(pokemonData);
-    // }, []);
+        localStorage.setItem('pokemon', JSON.stringify(pokemonData));
+    }
 
     return (
         <Modal
@@ -75,17 +69,17 @@ function UpdateStockModal(props) {
                     <Row className="modal-table-body">
                         <Col >Pcs</Col>
                         <Col className="d-flex align-items-center">1 x <Form.Control className="modal-input pcs" type="number" name="pcs" value={input.pcs} onChange={handleChange} /> = </Col>
-                        <Col>{stockPcs}</Col>
+                        <Col>{input.pcs || 0}</Col>
                     </Row>
                     <Row className="modal-table-body">
                         <Col>Lusin</Col>
                         <Col className="d-flex align-items-center">12 x <Form.Control name="lusin" className="modal-input lusin" type="number" value={input.lusin} onChange={handleChange} /> = </Col>
-                        <Col>{stockLusin}</Col>
+                        <Col>{12 * input.lusin || 0}</Col>
                     </Row>
                     <Row className="modal-table-body">
                         <Col>Total Stok <span>(dalam pcs)</span></Col>
                         <Col>Lusin</Col>
-                        <Col>{totalPcs}</Col>
+                        <Col>{(12 * input.lusin) + (1 * input.pcs) || 0}</Col>
                     </Row>
                 </Container>
             </Modal.Body>
@@ -97,11 +91,11 @@ function UpdateStockModal(props) {
                 </Button>
                 <Button
                     variant="secondary"
-                    onClick={props.onHide}>
+                    onClick={saveChange}>
                     Batal
                 </Button>
-            </Modal.Footer>
-        </Modal>
+            </Modal.Footer >
+        </Modal >
     );
 }
 
@@ -110,15 +104,6 @@ export default function PokemonDetail() {
     let { name } = useParams()
     const [modalShow, setModalShow] = React.useState(false);
 
-
-    {
-        Object.entries(localStorage).map(([key, valueJSON]) => {
-            const value = JSON.parse(valueJSON);
-            console.log(key, "key")
-            console.log(value.date, "ini tanggal")
-            return value
-        })
-    }
     return (
         <div className="pokemon-detail-page">
             <div className="pokemon-detail_button-group">
@@ -149,7 +134,7 @@ export default function PokemonDetail() {
                     </thead>
                     <tbody>
                         <tr className="align-items-center">
-                            <td className="">{value.date}</td>
+                            <td className=""></td>
                             <td className="table-link">Update Stok</td>
                             <td className="">"Stok Awal"</td>
                             <td className="table-count-stock">+10</td>
