@@ -101,7 +101,7 @@ export default function UpdateStock() {
             <h1 className="update-stock-title">Konfirmasi update stok</h1>
             {
                 pokemonData.map((pokemon, i) => {
-                    if (pokemon.pokemonName == name) {
+                    if (pokemon.pokemonName == name) { //
                         console.log(pokemon.pokemonName, "pokemonName", name, "name")
                         return (
                             <>

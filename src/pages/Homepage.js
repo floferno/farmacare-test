@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import searchIcon from '../images/search.svg'
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios'
 const baseUrl = `https://pokeapi.co/api/v2/pokemon`
@@ -23,8 +23,6 @@ export default function Homepage() {
         }
     }
 
-
-
     const searchPokemon = async (pokemon, e) => {
         console.log("masuk seacrh")
         try {
@@ -43,13 +41,11 @@ export default function Homepage() {
         getPokemons()
     }, [])
 
-
-
     return (
         <div className="app-container">
             <h1 className="title">Stok Pokémon</h1>
-            <div className="">
-                <img src={searchIcon} className="search-icon" />
+            <div className="position-relative">
+                <img src={searchIcon} className="search-icon position-absolute" />
                 <input type="text"
                     className="search-box"
                     placeholder="Cari Pokémon"

@@ -35,7 +35,7 @@ function UpdateStockModal(props) {
             total: totalPcs,
             history: [
                 {
-                    date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', }),
+                    date: new Date(),
                     activity: '',
                     note: '',
                     count: 0,
@@ -149,7 +149,7 @@ export default function PokemonDetail() {
                                     console.log(pokemon.history[0].date, "pokemon di update")
                                     return (
                                         <tr className="align-items-center">
-                                            <td className="">{pokemon.history[0].date}</td>
+                                            <td className="">{new Date(pokemon.history[0].date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</td>
                                             <td className="table-link">Update Stok</td>
                                             <td className=""></td>
                                             <td className="table-count-stock">+10</td>
