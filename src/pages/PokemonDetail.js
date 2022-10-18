@@ -9,8 +9,9 @@ function UpdateStockModal(props) {
     const [input, setInput] = useState({})
 
     let stockPcs = 1 * input.pcs
-    let stockLusin = 12 * input.lusin
-    let totalPcs = stockPcs + stockLusin
+    let stockDozen = 1 * input.dozen
+    let stockDozenToPcs = 12 * input.dozen
+    let totalPcs = stockPcs + stockDozenToPcs
     let navigate = useNavigate();
 
 
@@ -23,17 +24,18 @@ function UpdateStockModal(props) {
     };
 
     const saveChange = () => {
-        navigate(`/update-stock/`)
+        navigate(`/update-stock/${name}`)
         var pokemonData = [];
-        pokemonData = JSON.parse(localStorage.getItem("users") || "[]");
+        pokemonData = JSON.parse(localStorage.getItem("pokemon") || "[]");
         pokemonData.push({
             pokemonName: name,
             pcs: stockPcs,
-            lusin: stockLusin,
+            dozen: stockDozen,
+            dozenToPcs: stockDozenToPcs,
             total: totalPcs,
             history: [
                 {
-                    date: new Date().toLocaleString(),
+                    date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', }),
                     activity: '',
                     note: '',
                     count: 0,
@@ -43,6 +45,7 @@ function UpdateStockModal(props) {
         })
 
         localStorage.setItem('pokemon', JSON.stringify(pokemonData));
+
     }
 
     return (
@@ -73,13 +76,13 @@ function UpdateStockModal(props) {
                     </Row>
                     <Row className="modal-table-body">
                         <Col>Lusin</Col>
-                        <Col className="d-flex align-items-center">12 x <Form.Control name="lusin" className="modal-input lusin" type="number" value={input.lusin} onChange={handleChange} /> = </Col>
-                        <Col>{12 * input.lusin || 0}</Col>
+                        <Col className="d-flex align-items-center">12 x <Form.Control name="dozen" className="modal-input dozen" type="number" value={input.dozen} onChange={handleChange} /> = </Col>
+                        <Col>{12 * input.dozen || 0}</Col>
                     </Row>
                     <Row className="modal-table-body">
                         <Col>Total Stok <span>(dalam pcs)</span></Col>
                         <Col>Lusin</Col>
-                        <Col>{(12 * input.lusin) + (1 * input.pcs) || 0}</Col>
+                        <Col>{(12 * input.dozen) + (1 * input.pcs) || 0}</Col>
                     </Row>
                 </Container>
             </Modal.Body>
@@ -102,7 +105,14 @@ function UpdateStockModal(props) {
 export default function PokemonDetail() {
     let navigate = useNavigate();
     let { name } = useParams()
-    const [modalShow, setModalShow] = React.useState(false);
+    const [modalShow, setModalShow] = useState(false);
+    const [pokemonData, setPokemonData] = useState([])
+
+    useEffect(() => {
+        let pokemonData = JSON.parse(localStorage.getItem('pokemon') || "[]");
+        console.log(pokemonData, "ini di detail")
+        setPokemonData(pokemonData)
+    }, [])
 
     return (
         <div className="pokemon-detail-page">
@@ -133,13 +143,25 @@ export default function PokemonDetail() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="align-items-center">
-                            <td className=""></td>
-                            <td className="table-link">Update Stok</td>
-                            <td className="">"Stok Awal"</td>
-                            <td className="table-count-stock">+10</td>
-                            <td className="table-bold">10</td>
-                        </tr>
+                        {
+                            pokemonData.map(pokemon => {
+                                if (pokemon.pokemonName == name) {
+                                    console.log(pokemon.history[0].date, "pokemon di update")
+                                    return (
+                                        <tr className="align-items-center">
+                                            <td className="">{pokemon.history[0].date}</td>
+                                            <td className="table-link">Update Stok</td>
+                                            <td className=""></td>
+                                            <td className="table-count-stock">+10</td>
+                                            <td className="table-bold">10</td>
+                                        </tr>
+                                    )
+                                }
+
+
+
+                            })
+                        }
                     </tbody>
                 </Table>
             </div>
@@ -149,7 +171,7 @@ export default function PokemonDetail() {
                 onHide={() => setModalShow(false)}
             />
 
-        </div>
+        </div >
     )
 
 }

@@ -68,7 +68,7 @@ export default function Homepage() {
                         <tbody>
                             {
                                 pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(query)).map((pokemon, i) => {
-                                    console.log(pokemon)
+                                    // console.log(pokemon)
                                     return (
                                         <tr className="d-flex justify-content-between">
                                             <td key={i + 1} className="table-link" onClick={() => {
