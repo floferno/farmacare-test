@@ -26,7 +26,12 @@ function UpdateStockModal(props) {
     const saveChange = () => {
         navigate(`/update-stock/${name}`)
         var pokemonData = [];
+        //kalo gak ada data render empty array
+        //kalo ada data get dari localStorage && push 
         pokemonData = JSON.parse(localStorage.getItem("pokemon") || "[]");
+
+        // pokemonData = JSON.parse(localStorage.getItem("pokemon"))
+        console.log(pokemonData, "pokemon data di detail mau akses history")
         pokemonData.push({
             pokemonName: name,
             pcs: stockPcs,
@@ -36,16 +41,16 @@ function UpdateStockModal(props) {
             history: [
                 {
                     date: new Date(),
-                    activity: '',
-                    note: '',
-                    count: 0,
-                    totalStock: 0
+                    // activity: '',
+                    note: ''
+                    // count: 0,
+                    // totalStock: 0
                 }
             ]
         })
 
-        localStorage.setItem('pokemon', JSON.stringify(pokemonData));
 
+        localStorage.setItem('pokemon', JSON.stringify(pokemonData));
     }
 
     return (
@@ -53,51 +58,61 @@ function UpdateStockModal(props) {
             {...props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
-            className="modal"
+            className="modal-lg"
             centered
         >
-            <Modal.Header closeButton>
-                <Modal.Title className="modal-title">
-                    Update stock
-                </Modal.Title>
-            </Modal.Header>
+            {/* <Modal.Header > */}
+            <Modal.Title className="modal-title ">
+                Update stock
+            </Modal.Title>
+            {/* </Modal.Header> */}
             <Modal.Body>
-                <h4>Masukkan jumlah stok yang tersedia di rak saat ini.</h4>
+                <h4 className="modal-subtitle">Masukkan jumlah stok yang tersedia di rak saat ini.</h4>
                 <Container>
-                    <Row>
+                    <Row className="modal-table-header header-borderline modal-first-row d-flex align-items-center">
                         <Col>Kemasan</Col>
-                        <Col>Jumlah</Col>
+                        <Col></Col>
+                        <Col className="d-flex text-align-start">Jumlah</Col>
                         <Col>Stok</Col>
                     </Row>
-                    <Row className="modal-table-body">
-                        <Col >Pcs</Col>
-                        <Col className="d-flex align-items-center">1 x <Form.Control className="modal-input pcs" type="number" name="pcs" value={input.pcs} onChange={handleChange} /> = </Col>
-                        <Col>{input.pcs || 0}</Col>
+                    <Row className="modal-table-body body-borderline">
+                        <Col className="modal-table-header d-flex align-items-center" >Pcs</Col>
+                        <Col className="d-flex align-items-center justify-content-end">1 x </Col>
+                        <Col className="d-flex align-items-center justify-content-start"><Form.Control className="modal-input pcs" type="number" name="pcs" value={input.pcs} onChange={handleChange} /> = </Col>
+                        <Col className="d-flex align-items-center justify-content-end">{input.pcs || 0}</Col>
                     </Row>
-                    <Row className="modal-table-body">
-                        <Col>Lusin</Col>
-                        <Col className="d-flex align-items-center">12 x <Form.Control name="dozen" className="modal-input dozen" type="number" value={input.dozen} onChange={handleChange} /> = </Col>
-                        <Col>{12 * input.dozen || 0}</Col>
+                    <Row className="modal-table-body header-borderline">
+                        <Col className="modal-table-header d-flex align-items-center">Lusin</Col>
+                        <Col className="d-flex align-items-center justify-content-end">12 x </Col>
+                        <Col className="d-flex align-items-center justify-content-start"><Form.Control name="dozen" className="modal-input dozen" type="number" value={input.dozen} onChange={handleChange} /> = </Col>
+                        <Col className="d-flex align-items-center justify-content-end">{12 * input.dozen || 0}</Col>
                     </Row>
-                    <Row className="modal-table-body">
-                        <Col>Total Stok <span>(dalam pcs)</span></Col>
-                        <Col>Lusin</Col>
-                        <Col>{(12 * input.dozen) + (1 * input.pcs) || 0}</Col>
+                    <Row className="modal-table-body modal-last-row align-items-center">
+                        <Col><span className="modal-table-header">Total Stok</span> (dalam pcs)</Col>
+                        {/* <Col></Col>
+                        <Col></Col> */}
+                        <Col className="d-flex align-items-center justify-content-end">{(12 * input.dozen) + (1 * input.pcs) || 0}</Col>
                     </Row>
                 </Container>
             </Modal.Body>
-            <Modal.Footer>
+            {/* <Modal.Footer> */}
+            <div className="modal-button-group">
+
                 <Button
-                    variant="primary"
+                    // variant="primary"
+                    className="modal-save-button"
                     onClick={saveChange} >
                     Simpan
                 </Button>
                 <Button
-                    variant="secondary"
-                    onClick={saveChange}>
+                    // variant="secondary"
+                    className="modal-cancel-button"
+                    onClick={() => props.setModalShow(false)}
+                >
                     Batal
                 </Button>
-            </Modal.Footer >
+            </div>
+            {/* </Modal.Footer > */}
         </Modal >
     );
 }
@@ -110,7 +125,7 @@ export default function PokemonDetail() {
 
     useEffect(() => {
         let pokemonData = JSON.parse(localStorage.getItem('pokemon') || "[]");
-        console.log(pokemonData, "ini di detail")
+        // console.log(pokemonData, "ini di detail")
         setPokemonData(pokemonData)
     }, [])
 
@@ -119,8 +134,8 @@ export default function PokemonDetail() {
             <div className="pokemon-detail_button-group">
                 <Button variant="outline-light" className="prev-button" onClick={() => {
                     navigate('/')
-                }}><img src={prevPageIcon}></img>Stok Pokémon</Button>
-                <Button className="update-stock-button" onClick={() => setModalShow(true)}>Update Stok</Button>
+                }}><img src={prevPageIcon} alt="Previous Page Arrow"></img>Stok Pokémon</Button>
+                <Button className="update-stock-button " onClick={() => setModalShow(true)}>Update Stok</Button>
             </div>
             <p className="pokemon-detail-title" style={{ textTransform: 'capitalize' }}>{name}</p>
             <div className="pokemon-detail-subtitle">
@@ -144,16 +159,18 @@ export default function PokemonDetail() {
                     </thead>
                     <tbody>
                         {
-                            pokemonData.map(pokemon => {
+                            pokemonData.filter(pokemon => pokemon.pokemonName).map((pokemon, i) => {
                                 if (pokemon.pokemonName == name) {
-                                    console.log(pokemon.history[0].date, "pokemon di update")
+                                    console.log(pokemon.pokemonName, "pokemonname")
+                                    console.log(name, "name")
+                                    // console.log(pokemon.history[0].date, "pokemon di update")
                                     return (
                                         <tr className="align-items-center">
                                             <td className="">{new Date(pokemon.history[0].date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</td>
-                                            <td className="table-link">Update Stok</td>
+                                            <td className="table-link">{i >= 1 ? `Update Stok` : `Stok awal`}</td>
                                             <td className=""></td>
-                                            <td className="table-count-stock">+10</td>
-                                            <td className="table-bold">10</td>
+                                            <td className="table-count-stock">+</td>
+                                            <td className="table-bold"></td>
                                         </tr>
                                     )
                                 }

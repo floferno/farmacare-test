@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import searchIcon from '../images/search.svg'
-// import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios'
 const baseUrl = `https://pokeapi.co/api/v2/pokemon`
@@ -24,7 +23,6 @@ export default function Homepage() {
     }
 
     const searchPokemon = async (pokemon, e) => {
-        console.log("masuk seacrh")
         try {
             if (e.key === 'Enter') {
                 let response = await axios.get(`${baseUrl} ${pokemon}`)
@@ -70,7 +68,7 @@ export default function Homepage() {
                                             <td key={i + 1} className="table-link" onClick={() => {
                                                 navigate(`/pokemon/${pokemon.name}`)
                                             }} style={{ textTransform: 'capitalize' }}>{pokemon.name}</td>
-                                            <td className="pokemon-stock">10 pcs</td>
+                                            <td className="pokemon-stock">{` pcs`}</td>
                                         </tr>
                                     )
                                 })
